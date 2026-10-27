@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#185FA5"/>
+    </marker>
+    <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D85A30"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="600" fill="#ffffff"/>
+
+  <text x="30" y="44" font-size="22" font-weight="600" fill="#2C2C2A">Один шаг обучения сети</text>
+
+  <!-- 1. прямой проход -->
+  <text x="30" y="120" font-size="16" font-weight="600" fill="#185FA5">① Прямой проход: данные идут вперёд, на выходе — loss</text>
+
+  <g font-size="12" fill="#5F5E5A" text-anchor="middle">
+    <text x="168" y="188">(300, 2)</text>
+    <text x="324" y="188">(300, 3)</text>
+    <text x="480" y="188">(300, 3)</text>
+    <text x="636" y="188">(300, 3)</text>
+    <text x="792" y="188">(300, 3)</text>
+  </g>
+
+  <!-- блоки -->
+  <g font-size="16" font-weight="600" text-anchor="middle">
+    <rect x="30" y="200" width="120" height="70" rx="8" fill="#F1EFE8" stroke="#5F5E5A"/>
+    <text x="90" y="230" fill="#2C2C2A">Данные X</text>
+    <text x="90" y="251" font-size="12" font-weight="400" fill="#5F5E5A">точки спирали</text>
+
+    <rect x="186" y="200" width="120" height="70" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+    <text x="246" y="230" fill="#0C447C">Dense 1</text>
+    <text x="246" y="251" font-size="12" font-weight="400" fill="#185FA5">веса, смещения</text>
+
+    <rect x="342" y="200" width="120" height="70" rx="8" fill="#F1EFE8" stroke="#5F5E5A"/>
+    <text x="402" y="241" fill="#2C2C2A">ReLU</text>
+
+    <rect x="498" y="200" width="120" height="70" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+    <text x="558" y="230" fill="#0C447C">Dense 2</text>
+    <text x="558" y="251" font-size="12" font-weight="400" fill="#185FA5">веса, смещения</text>
+
+    <rect x="654" y="200" width="120" height="70" rx="8" fill="#F1EFE8" stroke="#5F5E5A"/>
+    <text x="714" y="241" fill="#2C2C2A">Softmax</text>
+
+    <rect x="810" y="200" width="120" height="70" rx="8" fill="#FAECE7" stroke="#993C1D"/>
+    <text x="870" y="230" fill="#712B13">Loss</text>
+    <text x="870" y="251" font-size="12" font-weight="400" fill="#993C1D">одно число</text>
+  </g>
+
+  <!-- стрелки вперёд -->
+  <g stroke="#185FA5" stroke-width="2" marker-end="url(#blue)">
+    <line x1="152" y1="222" x2="184" y2="222"/>
+    <line x1="308" y1="222" x2="340" y2="222"/>
+    <line x1="464" y1="222" x2="496" y2="222"/>
+    <line x1="620" y1="222" x2="652" y2="222"/>
+    <line x1="776" y1="222" x2="808" y2="222"/>
+  </g>
+
+  <!-- стрелки назад -->
+  <g stroke="#D85A30" stroke-width="2" marker-end="url(#orange)">
+    <line x1="184" y1="250" x2="152" y2="250"/>
+    <line x1="340" y1="250" x2="308" y2="250"/>
+    <line x1="496" y1="250" x2="464" y2="250"/>
+    <line x1="652" y1="250" x2="620" y2="250"/>
+    <line x1="808" y1="250" x2="776" y2="250"/>
+  </g>
+
+  <!-- 2. обратный проход -->
+  <text x="30" y="312" font-size="16" font-weight="600" fill="#D85A30">② Обратный проход: «реакция» идёт от loss назад, слой за слоем</text>
+
+  <g font-size="12" fill="#2C2C2A" text-anchor="middle">
+    <text x="90" y="344">дальше идти</text>
+    <text x="90" y="360">некуда</text>
+
+    <text x="246" y="344">считает наклоны</text>
+    <text x="246" y="360">своих весов:</text>
+    <text x="246" y="376" font-weight="600" fill="#0C447C">вход × реакция</text>
+
+    <text x="402" y="344">пропускает реакцию,</text>
+    <text x="402" y="360">где вход был &gt; 0,</text>
+    <text x="402" y="376">иначе ставит 0</text>
+
+    <text x="558" y="344">считает наклоны</text>
+    <text x="558" y="360">своих весов:</text>
+    <text x="558" y="376" font-weight="600" fill="#0C447C">вход × реакция</text>
+    <text x="558" y="392">и передаёт</text>
+    <text x="558" y="408">реакцию ниже</text>
+
+    <text x="714" y="344">передаёт</text>
+    <text x="714" y="360">реакцию назад</text>
+
+    <text x="870" y="344">старт: как loss</text>
+    <text x="870" y="360">зависит от</text>
+    <text x="870" y="376">вероятностей</text>
+  </g>
+
+  <!-- 3. обновление -->
+  <g stroke="#3B6D11" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="246" y1="440" x2="246" y2="386"/>
+    <line x1="558" y1="440" x2="558" y2="416"/>
+  </g>
+  <rect x="170" y="440" width="480" height="64" rx="8" fill="#EAF3DE" stroke="#3B6D11"/>
+  <text x="410" y="466" font-size="15" font-weight="600" fill="#27500A" text-anchor="middle">③ Обновление: двигаются только веса и смещения Dense-слоёв</text>
+  <text x="410" y="490" font-size="14" fill="#27500A" text-anchor="middle">вес = вес − скорость_обучения × наклон</text>
+  <text x="410" y="528" font-size="12" fill="#5F5E5A" text-anchor="middle">«вход» каждый Dense-слой запомнил на прямом проходе в self.inputs</text>
+
+  <!-- 4. повтор -->
+  <text x="480" y="572" font-size="15" font-weight="600" fill="#2C2C2A" text-anchor="middle">④ Повторить ①–③ много раз (эпохи), пока loss не перестанет падать</text>
+</svg>
